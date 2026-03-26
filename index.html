@@ -1,54 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Terminal Interface</title>
-    <style>
-        body { background-color: #000000; color: #0f0; }
-        #terminal { background: #000; color: #0f0; padding: 10px; margin: 20px; border-radius: 5px; }
-        #input { color: #0f0; border: none; outline: none; background: transparent; width: 100%; }
-    </style>
+  <meta charset="UTF-8">
+  <title>Terminal Site</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      color: #00ff00;
+      font-family: Consolas, monospace;
+    }
+
+    .terminal {
+      padding: 20px;
+      height: 100vh;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    .line {
+      display: flex;
+    }
+
+    .prompt {
+      margin-right: 5px;
+    }
+
+    input {
+      background: black;
+      border: none;
+      color: #00ff00;
+      font-family: Consolas, monospace;
+      outline: none;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
-    <h1>Console</h1>
-    <div id="terminal">
-        <div id="output"></div>
-        <input id="input" type="text" placeholder="Type a command..." />
+  <div class="terminal" id="terminal">
+    <div class="line">
+      <span class="prompt">Console:\></span>
+      <input type="text" id="input" autofocus>
     </div>
-    <script>
-        const inputField = document.getElementById('input');
-        const outputDiv = document.getElementById('output');
+  </div>
 
-        inputField.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                const command = inputField.value;
-                handleCommand(command);
-                inputField.value = '';
-            }
-        });
+  <script>
+    const input = document.getElementById("input");
+    const terminal = document.getElementById("terminal");
 
-        function handleCommand(command) {
-            const output = document.createElement('div');
-            output.textContent = '> ' + command;
-            outputDiv.appendChild(output);
-            // Simple command handling
-            if (command === 'hello') {
-                outputDiv.appendChild(createOutputElement('meow'));
-            if (command === 'files') {
-                outputDiv.appendChild(createOutputElement('CIS BATTLE PLAN #47 GEONOSIS INVASION DOWNLOAD? Y/N'));
-            if (command === 'yo') {
-                outputDiv.appendChild(createOutputElement('Hello! How can I help you?'));
-            } else {
-                outputDiv.appendChild(createOutputElement(`Command not recognized: ${command}`));
-            }
-        }
+    input.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        const command = input.value.trim();
+        addLine("C:\\> " + command);
+        handleCommand(command);
+        input.value = "";
+      }
+    });
 
-        function createOutputElement(text) {
-            const output = document.createElement('div');
-            output.textContent = text;
-            return output;
-        }
-    </script>
+    function addLine(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      terminal.insertBefore(div, terminal.lastElementChild);
+      terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    function handleCommand(cmd) {
+      if (cmd === "hello") {
+        addLine("Hello there 👋");
+      } 
+      else if (cmd === "help") {
+        addLine("Available commands: hello, help, about");
+      } 
+      else if (cmd === "about") {
+        addLine("This is your custom terminal website.");
+      } 
+      else if (cmd === "clear") {
+        clearTerminal();
+      } 
+      else {
+        addLine("Command not found.");
+      }
+    }
+
+    function clearTerminal() {
+      const lines = document.querySelectorAll(".terminal div:not(.line)");
+      lines.forEach(line => line.remove());
+    }
+  </script>
 </body>
 </html>
