@@ -10,8 +10,8 @@
         #input { color: #0f0; border: none; outline: none; background: transparent; width: 100%; }
     </style>
 </head>
-<body>
-    <h1>Interactive Terminal</h1>
+<body style="background-color: black;">
+    <h1>Console</h1>
     <div id="terminal">
         <div id="output"></div>
         <input id="input" type="text" placeholder="Type a command..." />
@@ -34,6 +34,10 @@
             outputDiv.appendChild(output);
             // Simple command handling
             if (command === 'hello') {
+                outputDiv.appendChild(createOutputElement('meow'));
+            if (command === 'files') {
+                outputDiv.appendChild(createOutputElement('CIS BATTLE PLAN #47 GEONOSIS INVASION DOWNLOAD? Y/N'));
+            if (command === 'yo') {
                 outputDiv.appendChild(createOutputElement('Hello! How can I help you?'));
             } else {
                 outputDiv.appendChild(createOutputElement(`Command not recognized: ${command}`));
