@@ -47,6 +47,10 @@
   <script>
     const input = document.getElementById("input");
     const terminal = document.getElementById("terminal");
+    
+    document.addEventListener("contextmenu", function(e) {
+  e.preventDefault();
+    });
 
     input.addEventListener("keydown", function(e) {
       if (e.key === "Enter") {
