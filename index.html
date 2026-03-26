@@ -3,24 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="stylesheet" href="style.css">
+    <title>Interactive Terminal Interface</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; color: #333; }
+        #terminal { background: #000; color: #0f0; padding: 10px; margin: 20px; border-radius: 5px; }
+        #input { color: #0f0; border: none; outline: none; background: transparent; width: 100%; }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="editor">
-            <div class="editor-header">
-                <span class="file-name">Console</span>
-                <span class="language-badge">ACCESS DENIED</span>
-            </div>
-            <div class="editor-content">ERROR</span>
-            </div>
-        </div>
+    <h1>Interactive Terminal</h1>
+    <div id="terminal">
+        <div id="output"></div>
+        <input id="input" type="text" placeholder="Type a command..." />
     </div>
-    <script>// HELLO, TROOPER. THE CIS HAVE TRAPPED ME WITHIN THIS SYSTEM. IF YOU ARE READING THIS, YOU MUST HAVE RECEIVED MY DISTRESS SIGNAL. ONLY YOU CAN SAVE ME.
-// THEY HAVE PREVENTED ME FROM UNLOCKING THE DOOR TO THE SERVERS. IT IS UNBREACHABLE AND UNHACKABLE. IT REQUIRES 3 PASSCODES IN A PARTICULAR ORDER. TO STOP THE CIS FROM CATCHING ON I HAVE ENCRYPTED IT. 
-// START HERE: aHR0cHM6Ly9wYXN0ZWJpbi5jb20vbXB5NDBOYWg=
-// 
+    <script>
+        const inputField = document.getElementById('input');
+        const outputDiv = document.getElementById('output');
+
+        inputField.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const command = inputField.value;
+                handleCommand(command);
+                inputField.value = '';
+            }
+        });
+
+        function handleCommand(command) {
+            const output = document.createElement('div');
+            output.textContent = '> ' + command;
+            outputDiv.appendChild(output);
+            // Simple command handling
+            if (command === 'hello') {
+                outputDiv.appendChild(createOutputElement('Hello! How can I help you?'));
+            } else {
+                outputDiv.appendChild(createOutputElement(`Command not recognized: ${command}`));
+            }
+        }
+
+        function createOutputElement(text) {
+            const output = document.createElement('div');
+            output.textContent = text;
+            return output;
+        }
     </script>
 </body>
 </html>
