@@ -39,7 +39,7 @@
 <body>
   <div class="terminal" id="terminal">
     <div class="line">
-      <span class="prompt">BREACH DETECTED. PASSWORD REQUIRED. SECURITY QUESTION 1: What were the flying creatures found on Kamino, commonly used as mounts?</span>
+      <span class="prompt">Console:$?>:</span>
       <input type="text" id="input" autofocus>
     </div>
   </div>
@@ -87,6 +87,9 @@
       } 
       else if (cmd === "head of state") {
         addLine("SECURITY CHECK PASSED. D");
+      }
+      else if (cmd === "login") {
+        addLine("BREACH DETECTED. PASSWORD REQUIRED. SECURITY QUESTION 1: What were the flying creatures found on Kamino, commonly used as mounts?");
       } 
       else if (cmd === "clear") {
         clearTerminal();
